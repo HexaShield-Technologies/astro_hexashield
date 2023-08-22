@@ -1,7 +1,5 @@
 ---
 import { Image } from "@astrojs/image/components";
-import darkImage from "../../assets/images/dark-mode.png";
-import lightImage from "../../assets/images/light-mode.png";
 ---
 
 <div class="relative overflow-hidden  border-r border-r-green-500">
@@ -16,8 +14,8 @@ import lightImage from "../../assets/images/light-mode.png";
 		</div>
 
 		<div class="rounded-b-lg border-2 border-gray-800 bg-gray-800 dark:bg-gray-700">
-			<Image width={1000} aspectRatio={"16:9"} src={darkImage} alt="descriptive text" class="m-0 hidden h-auto max-w-full rounded-b-lg dark:block" />
-			<Image width={1000} aspectRatio={"16:9"} src={lightImage} alt="descriptive text" class="m-0 h-auto max-w-full rounded-b-lg dark:hidden" />
+			<Image width={1000} aspectRatio={"16:9"} src={import("../../assets/images/dark-mode.png")} alt="descriptive text" class="m-0 hidden h-auto max-w-full rounded-b-lg dark:block" />
+			<Image width={1000} aspectRatio={"16:9"} src={import("../../assets/images/light-mode.png")} alt="descriptive text" class="m-0 h-auto max-w-full rounded-b-lg dark:hidden" />
 		</div>
 
 		<div class="relative mx-auto h-[17px] w-[110%] max-w-[110%] translate-x-[-5%] rounded-b-xl rounded-t-sm bg-gray-800 dark:bg-gray-700">
