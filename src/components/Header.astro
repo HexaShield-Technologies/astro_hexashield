@@ -1,8 +1,59 @@
 ---
+import { Image } from "@astrojs/image/components";
 
 ---
-<header>
-    <div class="container mx-auto ">
-        <h1>Welcome</h1>
-    </div>
+
+<!-- Header -->
+<header class="no-prose z-50 flex w-full flex-wrap py-3 text-sm md:flex-nowrap lg:justify-start">
+	<div class="container mx-auto">
+		<nav class="w-full" aria-label="Global">
+			<div class="relative md:flex md:items-center md:justify-between">
+				<div class="flex items-center justify-between">
+					<a class="flex items-center" href="#">
+                        <Image src="/astro_hexashield/favicon.png" alt="Astro" class="inline me-3" width={32} height={32} />
+						<h1 class="text-white font-bold text-xl">CorpShield</h1>
+					</a>
+
+					<div class="md:hidden">
+						<button
+							type="button"
+							class="hs-collapse-toggle inline-flex items-center justify-center gap-2 rounded-md border bg-white p-2 align-middle text-sm font-medium text-gray-700 shadow-sm transition-all hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-violet-900 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:hover:bg-slate-800 dark:hover:text-white dark:focus:ring-offset-gray-800"
+							data-hs-collapse="#navbar-collapse-with-animation"
+							aria-controls="navbar-collapse-with-animation"
+							aria-label="Toggle navigation"
+						>
+							<svg class="hs-collapse-open:hidden h-4 w-4" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+								<path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"></path>
+							</svg>
+							<svg class="hs-collapse-open:block hidden h-4 w-4" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+								<path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
+							</svg>
+						</button>
+					</div>
+				</div>
+
+				<div id="navbar-collapse-with-animation" class="hs-collapse hidden grow basis-full overflow-hidden transition-all duration-300 md:block">
+					<div class="scrollbar-y max-h-[75vh] overflow-hidden overflow-y-auto">
+						<div class="mt-5 flex flex-col gap-x-0 divide-y divide-dashed divide-gray-200 dark:divide-gray-700 md:mt-0 md:flex-row md:items-center md:justify-end md:gap-x-7 md:divide-y-0 md:divide-solid md:pl-7">
+							<a class="py-3 font-medium text-gray-600 hover:text-gray-500 dark:text-gray-400 dark:hover:text-gray-500 md:py-6" href="#" aria-current="page">Landing</a>
+
+							<a class="py-3 font-medium text-gray-600 hover:text-gray-500 dark:text-gray-400 dark:hover:text-gray-500 md:py-6" href="#">Company</a>
+
+							<a class="py-3 font-medium text-gray-600 hover:text-gray-500 dark:text-gray-400 dark:hover:text-gray-500 md:py-6" href="#">Login</a>
+
+							<div class="pt-3 md:pt-0">
+								<a
+									class="inline-flex items-center justify-center gap-x-2 rounded-lg border border-transparent bg-green-400 px-3 py-2.5 text-center text-sm text-slate-900 transition hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-900 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800"
+									href="#"
+								>
+									Request demo
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</div>
 </header>
+<!-- End Header -->

@@ -1,0 +1,277 @@
+// .github/workflows/deploy.yml
+name: Deploy to GitHub Pages
+
+on:
+  # Trigger the workflow every time you push to the `main` branch
+  # Using a different branch name? Replace `main` with your branch’s name
+  push:
+    branches: [ main ]
+  # Allows you to run this workflow manually from the Actions tab on GitHub.
+  workflow_dispatch:
+
+# Allow this job to clone the repo and create a page deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout your repository using git
+        uses: actions/checkout@v3
+      - name: Install, build, and upload your site
+        uses: withastro/action@v0
+        # with:
+            # path: . # The root location of your Astro project inside the repository. (optional)
+            # node-version: 16 # The specific version of Node that should be used to build your site. Defaults to 16. (optional)
+            # package-manager: yarn # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
+
+
+// .spitignore
+*.png
+
+// .vscode/extensions.json
+{
+  "recommendations": ["astro-build.astro-vscode"],
+  "unwantedRecommendations": []
+}
+
+
+// .vscode/launch.json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "command": "./node_modules/.bin/astro dev",
+      "name": "Development server",
+      "request": "launch",
+      "type": "node-terminal"
+    }
+  ]
+}
+
+
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import tailwind from "@astrojs/tailwind";
+import sitemap from "@astrojs/sitemap";
+
+import image from "@astrojs/image";
+
+// https://astro.build/config
+export default defineConfig({
+  site: 'https://hexashield-technologies.github.io/astro_hexashield',
+  base: '/astro_hexashield/',
+  integrations: [
+    tailwind(),
+    sitemap(),
+    image({
+      serviceEntryPoint: '@astrojs/image/sharp',
+    })
+  ]
+}
+);
+
+// package.json
+{
+  "name": "dark-disk",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/image": "^0.17.3",
+    "@astrojs/sitemap": "^2.0.2",
+    "@astrojs/tailwind": "^4.0.0",
+    "astro": "^2.10.12",
+    "astro-seo-meta": "^2.2.0",
+    "sharp": "^0.32.5",
+    "tailwindcss": "^3.3.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.9",
+    "prettier": "^3.0.2",
+    "prettier-plugin-astro": "^0.12.0",
+    "prettier-plugin-tailwindcss": "^0.5.3"
+  }
+}
+
+
+// prettier.config.cjs
+/** @type {import("prettier").Config} */
+export default {
+    tailwindConfig: './tailwind.config.cjs',
+    plugins: ['prettier-plugin-astro', 'prettier-plugin-tailwindcss'],
+    overrides: [
+      {
+        files: '*.astro',
+        options: {
+          parser: 'astro',
+        },
+      },
+    ],
+  };
+  
+
+// src/components/Header.astro
+---
+
+---
+<header>
+    <div class="container mx-auto ">
+        <h1>Welcome</h1>
+    </div>
+</header>
+
+// src/components/Mockups/Laptop.astro
+---
+import { Image } from '@astrojs/image/components';
+import darkImage from './src/Assets/Images/dark-mode.png';
+import lightImage from './src/Assets/Images/light-mode.png';
+
+
+---
+<div class="overflow-hidden relative bg-red-200">
+    <figure class="ms-auto -right-[15rem] relative z-[1] max-w-full w-[50rem] h-auto rounded-b-lg shadow-[0_2.75rem_3.5rem_-2rem_rgb(45_55_75_/_20%),_0_0_5rem_-2rem_rgb(45_55_75_/_15%)] dark:shadow-[0_2.75rem_3.5rem_-2rem_rgb(0_0_0_/_20%),_0_0_5rem_-2rem_rgb(0_0_0_/_15%)]">
+        <div class="relative flex items-center max-w-[50rem] bg-gray-800 rounded-t-lg py-2 px-24 dark:bg-gray-700">
+          <div class="flex space-x-1 absolute top-2/4 left-4 -translate-y-1">
+            <span class="w-2 h-2 bg-red-600 rounded-full "></span>
+            <span class="w-2 h-2 bg-orange-500 rounded-full "></span>
+            <span class="w-2 h-2 bg-green-400 rounded-full "></span>
+          </div>
+          <div class="flex justify-center items-center w-full h-full bg-gray-700 text-[.25rem] text-gray-400 rounded-sm sm:text-[.5rem] dark:bg-gray-600 dark:text-gray-400">www.6degrees.com.sa</div>
+        </div>
+      
+        <div class="bg-gray-800 rounded-b-lg border-2 border-gray-800 dark:bg-gray-700">
+            <Image width={1000} aspectRatio={"16:9"} src={darkImage} alt="descriptive text" class="hidden dark:block m-0 max-w-full h-auto rounded-b-lg" />
+            <Image width={1000} aspectRatio={"16:9"} src={lightImage} alt="descriptive text" class="dark:hidden m-0 max-w-full h-auto rounded-b-lg" />
+        </div>
+    
+        <div class="relative mx-auto bg-gray-800 dark:bg-gray-700 rounded-b-xl rounded-t-sm h-[17px] max-w-[110%] w-[110%] translate-x-[-5%]">
+            <div class="absolute left-1/2 top-0 -translate-x-1/2 rounded-b-xl w-[56px] h-[5px] md:w-[96px] md:h-[8px] bg-gray-800"></div>
+        </div>
+      </figure>
+</div>
+
+
+// src/components/Sections/Showcase.astro
+---
+import  MockupsLaptop from '../../components/Mockups/Laptop.astro'
+---
+<section id="showcase" class="grid grid-cols-1 lg:grid-cols-2">
+    <div class="p-8 flex flex-col justify-center">
+        <h1 class="text-4xl font-bold mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
+        <p class="text-lg mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Quisquam, voluptatum.</p>
+        <a href="#" class="btn btn-primary">Read More</a>
+    </div>
+    <MockupsLaptop />
+</section>
+
+// src/env.d.ts
+// Replace `astro/client` with `@astrojs/image/client`
+/// <reference types="@astrojs/image/client" />
+
+
+// src/layouts/Layout.astro
+--- 
+import { Seo } from "astro-seo-meta"
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description}>
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/png" href="/favicon.png" />
+		<link rel="sitemap" href="/astro_hexashield/sitemap-index.xml" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<Seo
+          title={title}
+          description={description}
+		  themeColor="#000000"
+		  facebook={{
+			image: "/astro_hexashield/logo-dark.png",
+			url: "https://hexashield-technologies.github.io/astro_hexashield",
+			type: "website",
+		}}
+	    twitter={{
+			image: "/astro_hexashield/logo-dark.png",
+			site: "@6degrees_sa",
+			card: "summary",
+		}}
+	
+          icon="astro_hexashield/favicon.png"
+        />
+	</head>
+	<body class="prose max-w-none prose-slate dark:prose-invert dark:bg-sky-950">
+		<slot />
+	</body>
+</html>
+
+// src/pages/index.astro
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Showcase from '../components/Sections/Showcase.astro';
+---
+
+<Layout title="Welcome to HexaShield." description="where everything goes through">
+	<main>
+	
+		<h1>Welcome to Astro</h1>
+		<p>
+			To get started, open the directory <code>src/pages</code> in your project.<br />
+			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
+		</p>
+		<Header />
+		<Showcase />
+	
+	</main>
+</Layout>
+
+
+// tailwind.config.cjs
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+	theme: {
+		extend: {},
+	},
+	plugins: [
+		require('@tailwindcss/typography'),
+	],
+}
+
+
+// tsconfig.json
+{
+  "extends": "astro/tsconfigs/strict",
+  "prettier": "./prettier.config.cjs"
+}

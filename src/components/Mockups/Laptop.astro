@@ -1,18 +1,27 @@
 ---
-import { Image } from '@astrojs/image/components';
-import darkImage from './src/Assets/Images/dark-mode.png';
-import lightImage from './src/Assets/Images/light-mode.png';
-
-
+import { Image } from "@astrojs/image/components";
+import darkImage from "./src/Assets/Images/dark-mode.png";
+import lightImage from "./src/Assets/Images/light-mode.png";
 ---
 
-<div class="relative mx-auto border-gray-800 dark:border-gray-800 bg-gray-800 border-[8px] rounded-t-xl h-[172px] max-w-[301px] md:h-[294px] md:max-w-[512px]">
-    <div class="rounded-lg overflow-hidden h-[156px] md:h-[278px] bg-white dark:bg-gray-800">
-        <Image width={1000} height={1000} src={darkImage} alt="descriptive text" class="dark:hidden h-[156px] md:h-[278px] w-full rounded-xl" />
-        <Image width={1000} height={1000} src={lightImage} alt="descriptive text" class="hidden dark:block h-[156px] md:h-[278px] w-full rounded-lg" />
-    </div>
-</div>
+<div class="relative overflow-hidden  border-r border-r-green-500">
+	<figure class="relative -right-[15rem] z-[1] ms-auto h-auto w-[50rem] max-w-full rounded-b-lg shadow-[0_2.75rem_3.5rem_-2rem_rgb(45_55_75_/_20%),_0_0_5rem_-2rem_rgb(45_55_75_/_15%)] dark:shadow-[0_2.75rem_3.5rem_-2rem_rgb(0_0_0_/_20%),_0_0_5rem_-2rem_rgb(0_0_0_/_15%)]">
+		<div class="relative flex max-w-[50rem] items-center rounded-t-lg bg-gray-800 px-24 py-2 dark:bg-gray-700">
+			<div class="absolute left-4 top-2/4 flex -translate-y-1 space-x-1">
+				<span class="h-2 w-2 rounded-full bg-red-600"></span>
+				<span class="h-2 w-2 rounded-full bg-orange-500"></span>
+				<span class="h-2 w-2 rounded-full bg-green-400"></span>
+			</div>
+			<div class="flex h-full w-full items-center justify-center rounded-sm bg-gray-700 text-[.25rem] text-gray-400 dark:bg-gray-600 dark:text-gray-400 sm:text-[.5rem]">www.6degrees.com.sa</div>
+		</div>
 
-<div class="relative mx-auto bg-gray-900 dark:bg-gray-700 rounded-b-xl rounded-t-sm h-[17px] max-w-[351px] md:h-[21px] md:max-w-[597px]">
-    <div class="absolute left-1/2 top-0 -translate-x-1/2 rounded-b-xl w-[56px] h-[5px] md:w-[96px] md:h-[8px] bg-gray-800"></div>
+		<div class="rounded-b-lg border-2 border-gray-800 bg-gray-800 dark:bg-gray-700">
+			<Image width={1000} aspectRatio={"16:9"} src={darkImage} alt="descriptive text" class="m-0 hidden h-auto max-w-full rounded-b-lg dark:block" />
+			<Image width={1000} aspectRatio={"16:9"} src={lightImage} alt="descriptive text" class="m-0 h-auto max-w-full rounded-b-lg dark:hidden" />
+		</div>
+
+		<div class="relative mx-auto h-[17px] w-[110%] max-w-[110%] translate-x-[-5%] rounded-b-xl rounded-t-sm bg-gray-800 dark:bg-gray-700">
+			<div class="absolute left-1/2 top-0 h-[5px] w-[56px] -translate-x-1/2 rounded-b-xl bg-gray-800 md:h-[8px] md:w-[96px]"></div>
+		</div>
+	</figure>
 </div>

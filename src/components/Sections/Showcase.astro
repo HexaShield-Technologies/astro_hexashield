@@ -1,6 +1,27 @@
 ---
-import  MockupsLaptop from '../../components/Mockups/Laptop.astro'
+import MockupsLaptop from "../../components/Mockups/Laptop.astro";
 ---
-<section id="showcase">
-    <MockupsLaptop />
+
+<section id="showcase" class="py16 lg:py-32">
+	<div class="container mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 ">
+            <div class="prose-2xl mx-auto flex  flex-col justify-center">
+                <h1 class="mb-0 leading-tight">Start your journey with <span class="text-green-400">CorpShield</span> today!</h1>
+                <p class="text-gray-800 dark:text-gray-400">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Quisquam, voluptatum.</p>
+                <!-- Buttons -->
+                <div class="mt-7 grid gap-3 w-full sm:inline-flex">
+                    <a class="inline-flex justify-center items-center gap-x-3 text-center bg-green-600 hover:bg-green-400 border border-transparent text-sm lg:text-base text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4 dark:focus:ring-offset-gray-800" href="#">
+                      Get started
+                      <svg class="w-2.5 h-2.5" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M5.27921 2L10.9257 7.64645C11.1209 7.84171 11.1209 8.15829 10.9257 8.35355L5.27921 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      </svg>
+                    </a>
+                    <a class="inline-flex justify-center items-center gap-x-3.5 text-sm lg:text-base text-center border hover:border-gray-300 shadow-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4 dark:border-gray-800 dark:hover:border-gray-600 dark:shadow-slate-700/[.7] dark:text-white dark:focus:ring-gray-700 dark:focus:ring-offset-gray-800" href="#">
+                      Contact sales team
+                    </a>
+                  </div>
+            </div>
+            <MockupsLaptop />
+        </div>
+    </div>
 </section>
