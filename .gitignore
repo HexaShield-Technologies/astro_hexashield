@@ -19,3 +19,5 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+.spitignore
+source_code_dump.txt
